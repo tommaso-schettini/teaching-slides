@@ -1,0 +1,22 @@
+---
+title: "Minimal Thebe Test"
+format:
+  revealjs:
+    theme: simple
+    thebe: true
+    thebe-binder-url: https://mybinder.org
+    thebe-binder-config:
+      repo: tommaso-schettini/teaching-slides
+      ref: main
+jupyter: python3
+execute:
+  enabled: false
+  echo: true
+---
+
+## Try this cell
+
+```{python}
+a = 123
+a * 2
+```
