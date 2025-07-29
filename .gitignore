@@ -1,0 +1,27 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.ipynb_checkpoints
+*.egg-info/
+
+# Quarto output
+_site/
+.quarto/
+
+# Jupyter Notebook runtime files
+*.nbconvert.ipynb
+
+# Python environments
+.venv/
+env/
+venv/
+*.env
+
+# Editor directories and files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# System files
+*.bak
