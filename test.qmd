@@ -6,7 +6,7 @@ format:
     thebe: true
     thebe-binder-url: "https://mybinder.org"
     thebe-binder-config:
-      repo: your-github-username/interactive-slides
+      repo: tommaso-schettini/teaching-slides
       ref: main
 jupyter: slides
 execute:
