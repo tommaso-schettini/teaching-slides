@@ -1,0 +1,1112 @@
+---
+title: "Probability and Statistics"
+subtitle: "Course Introduction"
+format:
+  revealjs:
+    theme: [serif, custom.scss]
+    slide-number: true
+    center: false
+    background-transition: fade
+    transition: slide
+    code-line-numbers: true
+    title-slide-attributes:
+      data-background-image: "none"
+      data-background-size: cover
+      data-background-repeat: no-repeat
+    chalkboard: true
+    footer: "INDU 6310 - Fall 2025"
+jupyter: python3
+execute:
+  enabled: true
+  echo: true
+---
+
+# Course Organization
+
+## Course Instructor
+
+**Tommaso Schettini**, assistant professort at MIAE.
+
+*mail*: `tommaso.schettini@concordia.ca`
+
+*office hours*: Wednesday 2PM -- 3PM, EV 4.217
+
+::: {.infobox}
+If you are not available during office hours, please send me an email to arrange an alternative meeting.
+:::
+
+## Course Logistics
+
+Grade components:
+
+  - 20% Quizes
+  - 30% Midterm
+  - 50% Final
+
+::: {.infobox}
+A score of at least 50% in the final is **required** to pass the course.
+:::
+
+## Quizes and Midterm {.smaller}
+
+The midterm and the quizes will be held **during the usual class hours**.
+
+The **tentative** schedule for the quizes and midterm is the following:
+
+- Midterm - replaces the class of week 6 (before the break)
+- Quiz 1 - beginning of the class of week 3
+- Quiz 2 - beginning of the class of week 8
+
+::: {.infobox}
+**Note**: After the quizes class will continue as usual
+:::
+
+# Course Introduction
+
+## Why this course?
+
+The goal of this course is simple:
+
+::: {.infobox}
+To give you the **tools to handle uncertainty** in engineering systems.
+:::
+
+## Uncertainty in Industrial Engineering
+
+::: {.incremental}
+* **Demand**: How many customers will arrive tomorrow?
+* **Lead times**: Will the supplier deliver on schedule?
+* **Machine failures**: When will equipment break down?
+* **Processing times**: How long will each job take?
+* **Quality**: What fraction of products will be defective?
+* **Energy & transportation**: Travel times, fuel prices, weather impacts
+:::
+
+## The Newsvendor Problem
+
+A single-product retailer must choose how much inventory to stock:
+
+* Too **much** → unsold goods → **waste**
+* Too **little** → missed sales → **lost revenue**
+
+::: {.infobox}
+The **optimal order quantity** depends on the **distribution** of demand,
+not just the average demand.
+:::
+
+This is one of the classic **stochastic optimization** problems.
+
+## More Examples in Industrial Engineering
+
+::: {.incremental}
+* **Staff scheduling** under uncertain absenteeism
+* **Queuing systems**: call centers, hospitals, assembly lines
+* **Transportation**: travel-time variability, demand spikes
+* **Supply chains**: multi-stage networks with stochastic disruptions
+* **Project management**: uncertain task durations, PERT analysis
+* **Reliability & maintenance**: failure models, preventive maintenance policies
+:::
+
+## Why ML Needs Probability & Statistics
+
+Machine learning = learning **rules** from **past examples**  
+to make **good predictions** on the future.
+
+- Past data: fixed observations from the real world  
+- Future data: unknown, uncertain  
+
+Probability & statistics give us the tools to  
+**abstract from the past** and **reason about the future**:
+
+## Probability {.smaller}
+
+Probability is the mathematics that studies uncertainty.  
+It aims to compute the **likelihood** of certain events.
+
+:::{.columns .align-middle}
+::: {.column width="60%"}
+
+::: {.infobox}
+**Example**:
+
+- Given a standard deck of cards, what is the probability I draw an **Ace**?
+- How many cards should I draw on average before drawing an **Ace**?
+:::
+:::
+
+::: {.column width="40%"}
+![](figures/ace-of-spades.png){width=50% .center}
+:::
+:::
+
+## Statistics {.smaller}
+
+Statistics is the science of **learning** from data.
+
+::: {.infobox}
+**Example**:
+
+- You collect data on the heights of 100 students.
+- What is the **average height**?
+- Can you estimate the **average height** of all students at the university?
+- Are the students at Concordia on average taller compared to the students at Mc Gill?
+:::
+
+## What are Probability and Statistics?
+
+Probability and statistics are two sides of the same coin.
+
+- **Probability** goes from models ➜ data
+- **Statistics** goes from data ➜ models
+
+The first part of this course will deal with **Probability**, the second part will deal with **Statistics**.
+
+
+# The basics of Probability
+
+## Random Variables {.smaller}
+
+What is a random variable?
+
+Let's say that I roll a dice, and I get a 4.
+
+Is 4 a random variable?
+
+. . .
+
+</br>
+
+::: {.infobox}
+4 is just a number, the outcome of the dice is a random variable, **before being observed** 
+:::
+
+
+## Random Variables - cont. {.smaller}
+
+Let's consider a few more examples:
+
+::: {.incremental}
+- I roll a die **right now**
+- I rolled a die **this morning**, but haven’t told you the result
+- I **think of a number** in my head
+- The **number of letters in my name**
+- The number of cats I own
+:::
+
+## Randomness Depends on Knowledge {.smaller}
+
+Whether something is random depends on **your knowledge** of it.
+
+::: {.infobox}
+If you don't know the result of the die roll,
+or the number I thought of, you may model it as a random variable.
+:::
+
+Randomness is a **modeling choice**, not a property of the world.
+
+## A Practical Definition {.smaller}
+
+A **random variable** is anything that we choose to model as random in order to make better decisions.
+
+::: {.infobox}
+If modeling it as a random variable is useful, then it **is** a random variable, for you.
+:::
+
+Examples:
+
+- The weather tomorrow
+- The arrival time of a bus
+
+## A Formal Definition {.smaller}
+
+An **Experiment** is a preocedure that 
+
+- is carried out under controlled conditions
+- executed to discover an unknown result
+
+An Experiment is a **Random Experiment** if it can result in different outcomes when performed in the same manner every time.
+
+A random variable is the outcome of a random experiment.
+
+## Sample Spaces
+
+The set of all possible outcomes of a random experiment is called the sample space, $S$.
+
+- $S$ is **discrete** if it consists of a finite or countable infinite set of outcomes.
+- $S$ is **continuous** if it contains an interval (either finite or infinite) of real numbers.
+
+## Example: Camera Flash{.smaller}
+
+Get a random camera from a shop, and measure the cycle time of its flash  
+(the time taken to ready the camera for another flash).
+
+In general, the cycle time is a positive number, so it's sample space would be.
+$$
+S = \mathbb{R}^+ = \{x \mid x > 0\} \quad \text{(continuous)}
+$$
+
+. . .
+
+Suppose it is known that all recycle times are between 1.5 and 5 seconds.
+
+$$
+S = \{x \mid 1.5 < x < 5\} \quad \text{(continuous)}
+$$
+
+. . .
+
+Suppose now that for a specific brand, there are only three possible values of cycle time.
+$$
+S = \{\text{low}, \text{medium}, \text{high}\} \quad \text{(discrete)}
+$$
+
+## Example: Camera Flash - cont.
+
+A question about a random variable is itself a random variable.
+
+Does the camera have a minimum cycle time that is longer than 2 seconds?
+
+$$
+S = \{\text{yes}, \text{no}\} \quad \text{(discrete)}
+$$
+
+## Combining Probability Spaces
+
+To model multiple random variables, we use the **Cartesian product**:
+
+$$
+S = S_1 \times S_2 = \{ (x, y) \mid x \in S_1,\ y \in S_2 \}
+$$
+
+If each variable is discrete and finite:
+
+$$
+|S| = |S_1| \cdot |S_2|
+$$
+
+## Example: Coin Tosses {.smaller}
+
+Let $S_{\text{coin}} = \{ \text{H}, \text{T} \}$.
+
+The combined sample space is the Cartesian product:  
+$S = S_{\text{coin}} \times S_{\text{coin}}$.
+
+| **Coin 1** | **Coin 2** | **Outcome** |
+|------------|------------|--------------|
+| H          | H          | (H, H)       |
+| H          | T          | (H, T)       |
+| T          | H          | (T, H)       |
+| T          | T          | (T, T)       |
+
+$|S| = 4$
+
+## Example: Message Delays {.smaller}
+
+Messages are classified as on-time or late within the time specified by the system design. Use a tree diagram to represent the sample space of possible outcomes.
+
+<br/><div style="text-align: center;">
+  <img src="figures/three-messages.png" width="60%" />
+</div>
+
+## Events {.smaller}
+
+An **event** is a subset of the sample space of an experiment.
+
+Examples:
+
+- Rolling an even number: $\{2, 4, 6\}$
+- Two coins landing on the same side: $\{(H, H), (T, T)\}$
+- A recycle time of at least 2 seconds: $\{x \in S | \ x \geq 2\}$
+
+## The Probability of an Event {.smaller}
+
+The **probability** of an event is a number between 0 and 1 that quantifies how likely the event is to occur.
+
+$$
+P(E) \in [0, 1], \quad \text{where } E \subseteq S
+$$
+
+- $P(E) = 0$ ➜ impossible event 
+- $P(E) = 0.5$ ➜ event that occurs half of the times 
+- $P(E) = 1$ ➜ certain event
+
+## Outcomes are Events Too {.smaller}
+
+Each **individual outcome** in a sample space is itself an event
+
+::: {.infobox}
+If $x \in S$, then $\{x\} \subseteq S$ is a valid event.
+:::
+
+::: {.incremental}
+
+- In a die roll, each number (e.g., 3) is an event: $\{3\}$
+- Individual outcomes do **not** all need to have the same probability.  
+  For example, a **loaded die** might have:  
+  $$
+  P(6) = 0.3, \quad P(1) = 0.1
+  $$
+
+:::
+
+
+## Axioms of Probability {.smaller}
+
+Probabilities must satisfy certain characteristics, these are called **Axioms of Probability**.
+Let $S$ be the sample space and $E, F$ be events.
+
+1. **Non-negativity**:  
+   $$
+   P(E) \geq 0
+   $$
+
+2. **Normalization**:  
+   $$
+   P(S) = 1
+   $$
+
+3. **Additivity** (for disjoint events):
+$$
+  E \cap F = \emptyset, \quad \Rightarrow \quad P(E \cup F) = P(E) + P(F)
+$$
+
+---
+
+::: {.infobox}
+In mathematics, an **axiom** is a property we **assume to be true**,  
+and use as the foundation for building the theory.
+:::
+
+
+## Set Operations on Events {.smaller}
+
+Since events are sets of outcomes, we can perform **set operations** on them:
+
+| **Operation**   | **Symbol**         | **Meaning**     | **Interpretation**     |
+|-----------------|--------------------|------------------|-------------------------|
+| Union           | $A \cup B$     | A or B           | At least one occurs     |
+| Intersection    | $A \cap B$     | A and B          | Both occur              |
+| Complement      | $A^c$ or $A'$  | Not A         | A does not occur        |
+
+
+## Venn Diagrams
+
+<div style="text-align: center;">
+  <img src="figures/venn.png" width="50%" />
+</div>
+
+
+## Some Useful Intuitions {.smaller .no-spacer}
+
+- The **union** of two events is always at least as likely as their intersection:  
+  $$
+  P(A \cup B) \geq P(A \cap B)
+  $$
+- Specifically:
+  $$
+  P(A \cup B) = P(A) + P(B) - P(A \cap B)
+  $$
+
+. . .
+
+- An **event and its complement** have total probability 1:
+  $$
+  P(A) + P(A^c) = 1
+  $$
+
+. . .
+
+- If one event is a **subset** of another, its probability is less than or equal:
+  $$
+  A \subseteq B \Rightarrow P(A) \leq P(B)
+  $$
+
+
+## Example: roll of a die {.smaller}
+
+Let the sample space be $S = \{1, 2, 3, 4, 5, 6\}$, representing a fair die roll.
+
+$A = \{\text{even numbers}\} = \{2, 4, 6\}$  
+
+$B = \{\text{divisible by 3}\} = \{3, 6\}$
+
+::: {.incremental}
+Then:
+
+1. What is $A \cap B$?  
+2. What is $A \cup B$?  
+3. What is $A^c$?  
+4. What is $P(A)$?  
+5. What is $P(A \cup B)$?  
+6. What is $P(A \cap B)$?
+:::
+
+
+## Distributive Laws
+
+- Union distributes over intersection:  
+  $$
+  (A \cup B) \cap C = (A \cap C) \cup (B \cap C)
+  $$
+
+- Intersection distributes over union:  
+  $$
+  (A \cap B) \cup C = (A \cup C) \cap (B \cup C)
+  $$
+
+## DeMorgan’s Laws
+
+These allow us to simplify the complement of compound events:
+
+-  
+  $$
+  (A \cup B)^c = A^c \cap B^c
+  $$
+
+-  
+  $$
+  (A \cap B)^c = A^c \cup B^c
+  $$
+
+## Commutativity of Set Operations
+
+Set operations are **commutative**, meaning the order does not matter:
+
+$$
+A \cup B = B \cup A
+$$
+
+$$
+A \cap B = B \cap A
+$$
+
+## Example: circuit analog
+
+-- circuit analog for manipulating probabilities with set operations
+-- examples of tips and tricks to manipulate compound probabilities
+
+## Implication {.smaller}
+
+In probability and logic, **implication** means:
+
+::: {.infobox}
+If event $A$ occurs, then event $B$ must also occur.
+:::
+
+This is written as:
+
+$$
+A \Rightarrow B
+$$
+
+---
+
+::: {.infobox}
+This does **not** mean that $A$ causes $B$, only that whenever $A$ happens, $B$ also does.
+:::
+
+<div style="text-align: center;">
+  <img src="figures/correlation.png" width="70%" />
+</div>
+
+
+## Mutually Exclusive Events {.smaller}
+
+Two events are **mutually exclusive** if they cannot both happen at the same time:
+
+$$
+A \Rightarrow \not B
+$$
+
+So, $A$ implies not $B$, and vice versa
+
+$$
+A \cap B = \emptyset
+$$
+
+If events are mutually exclusive:
+
+$$
+P(A \cup B) = P(A) + P(B)
+$$
+
+---
+
+<div style="text-align: center;">
+  <img src="figures/exclusive.png" width="70%" />
+</div>
+
+
+
+## Counting Techniques
+
+In the case where all possible outcomes are **equally likely** we often use counting techniques.
+
+::: {.infobox}
+You probably used these techniques right now in the examples that we just discussed!
+:::
+
+## Counting Techniques
+
+The idea is very simple, we compute two quantities:
+
+- The number of outcomes in the sample space
+- The number of outcomes in an event
+
+The probability of an event is:
+
+$$
+P(E) = \frac{\text{Number of favorable outcomes}}{\text{Total number of outcomes}}
+$$
+
+## Example: Throwing Three Coins {.smaller}
+
+We toss a fair coin **three times**.
+
+Each outcome is equally likely. The sample space is:
+
+$$
+S = \{HHH,\ HHT,\ HTH,\ HTT,\ THH,\ THT,\ TTH,\ TTT\}
+$$
+
+There are $2^3 = 8$ total outcomes.
+
+---
+
+Let’s count how many outcomes give:
+
+::: {.incremental}
+- **0 heads**: TTT → 1 outcome  
+- **1 head**: HTT, THT, TTH → 3 outcomes  
+- **2 heads**: HHT, HTH, THH → 3 outcomes  
+- **3 heads**: HHH → 1 outcome
+:::
+
+. . .
+
+**Probability of 2 heads**:  
+$$
+P(\text{2 heads}) = \frac{3}{8}
+$$
+
+## Multiplication Rule {.smaller .no-spacer}
+
+The **Multiplication Rule** helps count the size of a **sample space**  when an experiment consists of **multiple stages** or **steps**.
+
+::: {.infobox}
+If an experiment has \( k \) stages, and
+
+- Stage 1 has \( n_1 \) possible outcomes  
+- Stage 2 has \( n_2 \) outcomes  
+- … 
+- Stage \( k \) has \( n_k \) outcomes
+
+then the **total number of outcomes** in the sample space is:
+$$
+n_1 \times n_2 \times \dots \times n_k
+$$
+:::
+
+## Example: Passwords {.smaller}
+
+You want to create a 3-character password.
+
+::: {.incremental}
+- First character: 26 options  
+- Second character: 26 options  
+- Third character: 26 options
+:::
+
+. . .
+
+**Total passwords** =  
+$$
+26 \times 26 \times 26 = 17,\!576
+$$
+
+
+## Permutations of a Set {.smaller .no-spacer}
+
+Permutations count the number of ways a set can be arranged.
+
+If we have a set of $n$ elements, each position must be filled with a unique item:
+
+- 1st position: $n$ choices  
+- 2nd position: $n - 1$ choices  
+- 3rd position: $n - 2$ choices  
+- ...  
+- Last position: 1 choice
+
+. . .
+
+::: {.infobox}
+**Total permutations of $n$ objects:**
+
+$$
+n! = n \times (n - 1) \times \dots \times 1
+$$
+:::
+
+## Example: Deck of cards
+
+In how many ways is it possible to shuffle a deck of cards?
+
+. . .
+
+$$
+n! = 52! = 8.0e67
+$$
+(a lot)
+
+## Permutations of a Subset {.smaller}
+
+Sometimes we are only interested in the permutations of a subset rather than the full ordering.
+Suppose we are running a competition with 10 contestants, how many possible combinations exist for the podium?
+
+- 1st place: 10 choices  
+- 2nd place: 9 choices  
+- 3rd place: 8 choices
+
+$$ 10 \times  9 \times 8 = 720 $$
+
+## Permutations of a Subset {.smaller}
+
+More generally:
+
+::: {.infobox}
+**Permutations of $r$ items from $n$:**
+
+$$
+P(n, r) = \frac{n!}{(n - r)!}
+$$
+:::
+
+## Combinations {.smaller .no-spacer}
+
+Sometimes we only care about selecting elements from a set, but the order does not matter.
+
+In poker, a **hand** is a set of 5 cards drawn from a standard 52-card deck.  
+**The order of the cards doesn't matter.**
+
+If we simply count all possible ways to draw 5 cards **in order**:
+
+$$
+P(52, 5) = 52 \times 51 \times 50 \times 49 \times 48
+$$
+
+That’s **all permutations** of 5 distinct cards, but we’re **overcounting**:  
+Every group of 5 cards appears $5! = 120$ times in different orders.
+
+So we need to divide the number of permutations by 120:
+
+$$
+\frac{52 \times 51 \times 50 \times 49 \times 48}{5!} = 2,\!598,\!960
+$$
+
+## Combinations {.smaller .no-spacer}
+
+More generally:
+Combinations deal with the possible ways of selecting $r$ items from a set of $n$ items.
+
+$$
+\binom{n}{r} = \frac{n!}{r!(n - r)!}
+$$
+
+This is called a binomial, or "r choose n".
+
+## The Division Rule {.smaller}
+
+How did we arrive at the formula for combinations?
+
+::: {.infobox}
+If each valid outcome is counted $k$ times,  
+then divide by $k$ to get the correct count.
+:::
+
+$$
+\text{Correct count} = \frac{\text{Total arrangements}}{k}
+$$
+
+This rule is often used when **order doesn't matter**.
+
+
+## Example: Poker Hands – cont. {.smaller}
+
+What is the probability of drawing a **four of a kind** (a poker hand)?
+
+The total number of possible hands is:
+$$
+\binom{52}{5} = 2,\!598,\!960
+$$
+
+---
+
+### What is the total number of poker hands?
+- Choose a **rank** for the 4 cards: $\binom{13}{1} = 13$  
+- Choose **4 suits** for that rank: $\binom{4}{4} = 1$  
+- Choose the 5th card from the **remaining 48** cards: $\binom{48}{1} = 48$
+
+$$
+\text{Total} = 13 \times 1 \times 48 = 624
+$$
+
+---
+
+### Combining this together:
+$$
+P(\text{four of a kind}) = \frac{624}{2,\!598,\!960} \approx 0.0002401
+$$
+
+That’s approximately **1 in 4165** hands.
+
+
+## Conditional Probability {.smaller}
+
+Sometimes we are interested in the probability of an event  
+**given that** another event has occurred.
+
+::: {.infobox}
+The **conditional probability** of $A$ given $B$ is:
+
+$$
+P(A \mid B) = \frac{P(A \cap B)}{P(B)} \quad \text{(if } P(B) > 0\text{)}
+$$
+:::
+
+This tells us how likely $A$ is, **assuming we know** $B$ has happened.
+
+
+## Example: Drawing cards {.smaller}
+
+You draw one card from a standard 52-card deck.
+
+Let:
+
+- $A$: the card is a **queen**
+- $B$: the card is a **face card** (J, Q, K → 12 cards)
+
+What is $P(A \mid B)$?
+
+---
+
+Only 3 of the 12 face cards are queens:
+
+$$
+P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{3/52}{12/52} = \frac{3}{12} = \frac{1}{4}
+$$
+
+So:  
+**If we know the card is a face card**,  
+the probability that it is a queen is $\frac{1}{4}$.
+
+## Example: Drawing Two Cards {.smaller}
+
+You draw **two cards** from a standard 52-card deck **without replacement**.
+
+Let:
+
+- $A$: the **second card** is a heart  
+- $B$: the **first card** is a heart
+
+What is $P(A \mid B)$?
+
+What is the probability the second card is a heart, **given** the first card was a heart?
+
+---
+
+After drawing one heart, there are:
+
+- **51 cards left**  
+- **12 hearts left**
+
+So:
+
+$$
+P(A \mid B) = \frac{12}{51}
+$$
+
+---
+
+The probability the **second card is a heart**,  
+given that the first card **was a heart**, is:
+
+$$
+P(A \mid B) = \frac{12}{51} \approx 0.235
+$$
+
+
+## Law of Total Probability {.smaller}
+
+Suppose events $B_1, B_2, \dots, B_n$ form a **partition** of the sample space:
+
+- They are **mutually exclusive**
+- Their union is the **entire sample space**
+
+Then for any event $A$:
+
+::: {.infobox}
+$$
+P(A) = \sum_{i=1}^{n} P(A \mid B_i) \cdot P(B_i)
+$$
+:::
+
+This allows us to compute the probability of $A$  
+by breaking it down into cases where each $B_i$ happens.
+
+## Example: Covid testing {.smaller}
+
+Suppose:
+
+- 1% of a population has a disease: $P(D) = 0.01$
+- 99% do not: $P(D^c) = 0.99$
+- Test is 95% accurate:
+  - $P(+ \mid D) = 0.95$
+  - $P(+ \mid D^c) = 0.05$
+
+---
+
+What is the probability that a **random person tests positive**?
+
+Using the law of total probability:
+
+$$
+P(+) = P(+ \mid D) \cdot P(D) + P(+ \mid D^c) \cdot P(D^c)
+$$
+
+$$
+= (0.95)(0.01) + (0.05)(0.99) = 0.059
+$$
+
+So: **5.9%** of people test positive overall.
+
+## Multiplication Rule {.smaller}
+
+The probability of two events $A$ and $B$ both occurring is:
+
+::: {.infobox}
+$$
+P(A \cap B) = P(A) \cdot P(B \mid A)
+$$
+:::
+
+This comes directly from the definition of conditional probability:
+
+$$
+P(B \mid A) = \frac{P(A \cap B)}{P(A)}
+$$
+
+If you know $P(A)$ and the conditional probability of $B$ given $A$,  
+you can compute the joint probability $P(A \cap B)$.
+
+## Independence {.smaller}
+
+Two events $A$ and $B$ are **independent** if:
+
+$$
+P(B \mid A) = P(B)
+$$
+
+and equivalently:
+
+$$
+P(A \cap B) = P(A) \cdot P(B)
+$$
+
+This means that knowing whether $A$ happened  
+gives you **no information** about $B$, and vice versa.
+
+## Bayes' Theorem {.smaller}
+
+Bayes’ Theorem allows us to **reverse conditional probabilities**:
+
+::: {.infobox}
+$$
+P(B \mid A) = \frac{P(A \mid B) \cdot P(B)}{P(A)}
+$$
+:::
+
+It’s most useful when:
+
+- You know how likely $A$ is **given** $B$
+- You want to compute how likely $B$ is **given** $A$
+
+---
+
+**Example** (from earlier):
+
+If someone tests positive:
+
+- What is the probability they actually have the disease?
+
+Use Bayes’ Theorem:
+
+$$
+P(D \mid +) = \frac{P(+ \mid D) \cdot P(D)}{P(+)}
+$$
+
+## A Witness Reports a Blue Car
+
+A hit-and-run occurs at night.
+
+A witness claims the car was **blue**.  
+They are known to correctly identify car colors **80% of the time**.
+
+---
+
+::: {.infobox}
+**Question**:  
+What is the probability that the car was actually blue?
+:::
+
+## But Here’s the Twist…
+
+In this city:
+
+- 85% of the cars are **green**
+- 15% of the cars are **blue**
+
+The witness always says **either blue or green**
+
+And again:
+
+- $P(\text{witness says "blue"} \mid \text{car is blue}) = 0.8$
+- $P(\text{witness says "blue"} \mid \text{car is green}) = 0.2$
+
+---
+
+Let’s apply **Bayes’ Theorem**.
+
+## Compute with Bayes
+
+We want:
+
+$$
+P(\text{Blue} \mid \text{Witness says Blue}) = \frac{P(\text{Witness says Blue} \mid \text{Blue}) \cdot P(\text{Blue})}{P(\text{Witness says Blue})}
+$$
+
+---
+
+We already know:
+
+- $P(B) = 0.15$, $P(G) = 0.85$
+- $P(W \mid B) = 0.8 \), $P(W \mid G) = 0.2$
+
+---
+
+**Denominator**:
+
+$$
+P(W) = (0.8)(0.15) + (0.2)(0.85) = 0.12 + 0.17 = 0.29
+$$
+
+---
+
+**Final result**:
+
+$$
+P(B \mid W) = \frac{0.12}{0.29} \approx 0.41
+$$
+
+
+
+## Lots of examples
+
+# Discrete random variables
+
+## Reminder: What is a random variable?
+- a random variable is...
+
+## Discrete random variables
+- reminder what could be a discrete random variable
+- note - a lot of variables are actually discrete, even those that do not look like it
+- because computers have limited number of bits
+
+## Sample space
+- it's the domain of the variable
+but thus far, we did not go into details about the probability part of the space
+we discussed a bit of the probability of certain events, but that was it
+
+## Probability Mass function
+this is a more formal way of discussing probabilities
+- it is a function with the following properties
+
+## Histogram representation of the Probability function
+- echo off
+- use python code to generate a random histogram
+
+## Cumulative probability distribution
+this is an alternative way of plotting the probability function
+- echo off
+- use python code to generate a random histogram and corresponding cdf
+
+## Mean, variance, std, expected value
+discuss the basic stats
+
+## Expected value of a function of a random variable
+
+## A few examples to show that it is not the sum of the expected values
+
+## Classic discrete random variables
+- for each, use python to plot the pdf, and the cdf
+- echo off
+- and describe the typical use-case
+
+- uniform
+- binomial/bernoulli
+- geometric
+  - lack of memory
+- nevative binomial
+- hypergeometric
+- poisson
+
+# Continuous random variables
+
+## the difference between continuous and discrete
+
+## Pdf, and CDF
+
+## using histograms to approximate PDFs
+
+## mean and variance od continuous variables
+
+## Classical distributions
+
+- uniform
+- normal
+  - standard random normal variables
+  - making calculations about standard normal distributions
+  - standardizing a normal
+  - normal approximation to the binomial and poisson
+- exponential
+- gamma function =(
+- weibull
+- lognormal
+- beta distribution
+
+# Joint probability distributions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

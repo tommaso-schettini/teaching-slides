@@ -1,0 +1,162 @@
+---
+title: "Probability and Statistics"
+subtitle: "Course Introduction"
+format:
+  revealjs:
+    theme: [serif, custom.scss]
+    slide-number: true
+    center: false
+    background-transition: fade
+    transition: slide
+    code-line-numbers: true
+    title-slide-attributes:
+      data-background-image: "none"
+      data-background-size: cover
+      data-background-repeat: no-repeat
+    chalkboard: true
+    footer: "INDU 6310 - Fall 2025"
+jupyter: python3
+execute:
+  enabled: true
+  echo: true
+---
+
+# Course Organization
+
+## Course Instructor
+
+**Tommaso Schettini**, assistant professort at MIAE.
+
+*mail*: `tommaso.schettini@concordia.ca`
+
+*office hours*: Wednesday 2PM -- 3PM, EV 4.217
+
+::: {.infobox}
+If you are not available during office hours, please send me an email to arrange an alternative meeting.
+:::
+
+## Course Logistics
+
+Grade components:
+
+  - 20% Quizes
+  - 30% Midterm
+  - 50% Final
+
+::: {.infobox}
+A score of at least 50% in the final is **required** to pass the course.
+:::
+
+## Quizes and Midterm {.smaller}
+
+The midterm and the quizes will be held **during the usual class hours**.
+
+The **tentative** schedule for the quizes and midterm is the following:
+
+- Midterm - replaces the class of week 6 (before the break)
+- Quiz 1 - beginning of the class of week 3
+- Quiz 2 - beginning of the class of week 8
+
+::: {.infobox}
+**Note**: After the quizes class will continue as usual
+:::
+
+# Why this course?
+
+## Goals
+
+The goal of this course is simple:
+
+::: {.infobox}
+To give you the **tools to handle uncertainty** in engineering systems.
+:::
+
+## Uncertainty in Industrial Engineering
+
+::: {.incremental}
+* **Demand**: How many customers will arrive tomorrow?
+* **Lead times**: Will the supplier deliver on schedule?
+* **Machine failures**: When will equipment break down?
+* **Processing times**: How long will each job take?
+* **Quality**: What fraction of products will be defective?
+* **Energy & transportation**: Travel times, fuel prices, weather impacts
+:::
+
+## The Newsvendor Problem
+
+A single-product retailer must choose how much inventory to stock:
+
+* Too **much** → unsold goods → **waste**
+* Too **little** → missed sales → **lost revenue**
+
+::: {.infobox}
+The **optimal order quantity** depends on the **distribution** of demand,
+not just the average demand.
+:::
+
+This is one of the classic **stochastic optimization** problems.
+
+## More Examples in Industrial Engineering
+
+::: {.incremental}
+* **Staff scheduling** under uncertain absenteeism
+* **Queuing systems**: call centers, hospitals, assembly lines
+* **Transportation**: travel-time variability, demand spikes
+* **Supply chains**: multi-stage networks with stochastic disruptions
+* **Project management**: uncertain task durations, PERT analysis
+* **Reliability & maintenance**: failure models, preventive maintenance policies
+:::
+
+## Why ML Needs Probability & Statistics
+
+Machine learning = learning **rules** from **past examples**  
+to make **good predictions** on the future.
+
+- Past data: fixed observations from the real world  
+- Future data: unknown, uncertain  
+
+Probability & statistics give us the tools to  
+**abstract from the past** and **reason about the future**:
+
+## Probability {.smaller}
+
+Probability is the mathematics that studies uncertainty.  
+It aims to compute the **likelihood** of certain events.
+
+:::{.columns .align-middle}
+::: {.column width="60%"}
+
+::: {.infobox}
+**Example**:
+
+- Given a standard deck of cards, what is the probability I draw an **Ace**?
+- How many cards should I draw on average before drawing an **Ace**?
+:::
+:::
+
+::: {.column width="40%"}
+![](figures/ace-of-spades.png){width=50% .center}
+:::
+:::
+
+## Statistics {.smaller}
+
+Statistics is the science of **learning** from data.
+
+::: {.infobox}
+**Example**:
+
+- You collect data on the heights of 100 students.
+- What is the **average height**?
+- Can you estimate the **average height** of all students at the university?
+- Are the students at Concordia on average taller compared to the students at Mc Gill?
+:::
+
+## Summarizing
+
+Probability and statistics are two sides of the same coin.
+
+- **Probability** goes from models ➜ data
+- **Statistics** goes from data ➜ models
+
+The first part of this course will deal with **Probability**, the second part will deal with **Statistics**.

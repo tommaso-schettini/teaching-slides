@@ -1,0 +1,61 @@
+/*-- scss:defaults --*/
+$body-bg: #ffffff;
+$body-color: #222222;
+$link-color: #007acc; // Accent blue
+$presentation-heading-color: #007acc;
+$font-family-sans-serif: 'Segoe UI', 'Helvetica Neue', sans-serif;
+
+/*-- scss:rules --*/
+.reveal .footer {
+  color: #555;
+  font-size: 0.8em;
+  text-align: center;
+  margin-top: 2em;
+  position: relative;
+}
+
+.reveal .footer::before {
+  content: "";
+  display: block;
+  width: 660px;
+  height: 4px;
+  margin: 0 auto 0.5em auto;
+  background-color: #007acc; /* match accent color */
+  border-radius: 2em; /* rounded caps */
+}
+
+.reveal .title::after {
+  content: "";
+  display: block;
+  width: 460px;
+  height: 4px;
+  margin: 0.5em auto;
+  background-color: #007acc;
+  border-radius: 2em;
+}
+
+.reveal .subtitle {
+  color: #007acc;
+}
+
+.infobox {
+  background-color: #e6f2fb; /* light blue */
+  border-left: 4px solid #007acc;
+  padding: 0.5em;
+  margin: 1em 0;
+  border-radius: 0.5em;
+  color: #003d66; /* darker blue text */
+}
+
+/* Default spacer after all h2 elements */
+.reveal h2::after {
+  content: "";
+  display: block;
+  height: 1em;
+}
+
+/* Remove the spacer if the SLIDE has the .no-spacer class */
+.reveal section.no-spacer h2::after {
+  content: none;
+  display: none;
+}
