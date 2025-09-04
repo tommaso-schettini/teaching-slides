@@ -13,7 +13,7 @@ format:
       data-background-image: "none"
       data-background-size: cover
       data-background-repeat: no-repeat
-    chalkboard: true
+    chalkboard: false 
     footer: "INDU 6310 - Fall 2025"
 jupyter: python3
 execute:
@@ -29,7 +29,7 @@ execute:
 
 *mail*: `tommaso.schettini@concordia.ca`
 
-*office hours*: Wednesday 2PM -- 3PM, EV 4.217
+*office hours*: Wednesday 2.00 PM -- 3.30 PM, EV 4.217
 
 ::: {.infobox}
 If you are not available during office hours, please send me an email to arrange an alternative meeting.
@@ -39,8 +39,8 @@ If you are not available during office hours, please send me an email to arrange
 
 Grade components:
 
-  - 20% Quizes
-  - 30% Midterm
+  - 30% Quizes
+  - 15% Assignment
   - 50% Final
 
 ::: {.infobox}
@@ -53,7 +53,7 @@ The midterm and the quizes will be held **during the usual class hours**.
 
 The **tentative** schedule for the quizes and midterm is the following:
 
-- Midterm - replaces the class of week 6 (before the break)
+- Assignment - will be a take-home assignment - tentative start week 8
 - Quiz 1 - beginning of the class of week 3
 - Quiz 2 - beginning of the class of week 8
 
@@ -71,7 +71,7 @@ The goal of this course is simple:
 To give you the **tools to handle uncertainty** in engineering systems.
 :::
 
-## Uncertainty in Industrial Engineering
+## Uncertainty in Industrial Engineering {.smaller}
 
 ::: {.incremental}
 * **Demand**: How many customers will arrive tomorrow?
@@ -82,7 +82,7 @@ To give you the **tools to handle uncertainty** in engineering systems.
 * **Energy & transportation**: Travel times, fuel prices, weather impacts
 :::
 
-## The Newsvendor Problem
+## The Newsvendor Problem {.smaller}
 
 A single-product retailer must choose how much inventory to stock:
 
@@ -96,7 +96,7 @@ not just the average demand.
 
 This is one of the classic **stochastic optimization** problems.
 
-## More Examples in Industrial Engineering
+## More Examples in Industrial Engineering {.smaller}
 
 ::: {.incremental}
 * **Staff scheduling** under uncertain absenteeism
